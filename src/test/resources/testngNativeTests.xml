@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="TestNg Suite">
+    <test name="Native test">
+        <groups>
+            <run>
+                <include name="native"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="scenarios"/>
+            <package name="scenarios.NativeTest"/>
+        </packages>
+    </test>
+</suite>
