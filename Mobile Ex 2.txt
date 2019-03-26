@@ -1,0 +1,25 @@
+5. Modify existing tests to run on a real device. What should be changed?
+Change deviceName in project (class Driver)
+capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, DEVICE); // default Android emulator
+6. Connect a real device to Appium (describe required actions) and run tests. Are there any difference with run on emulator?
+ A pop-up window appears on a real device: select a search engine. In the emulator this window does not appear but it does not interfere with the passing of the test.
+For app in appium: 
+{
+  "platformName": "Android",
+  "deviceName": "520064a5b89bc4a9",
+  "app": "C:\\Users\\Lika\\NadezhdaPetelimova_Mobile\\src\\main\\resources\\ContactManager.apk"
+}
+
+For site:
+{
+  "platformName": "Android",
+  "deviceName": "520064a5b89bc4a9",
+	"browserName": "Chrome"
+}
+
+
+And add the necessary Chromedriver.
+(for emulator  "deviceName": "emulator-5554")
+
+
+
