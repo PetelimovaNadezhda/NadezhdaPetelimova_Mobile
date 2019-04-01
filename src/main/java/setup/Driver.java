@@ -17,10 +17,12 @@ public class Driver extends TestProperties {
     private static WebDriverWait waitSingle;
     protected DesiredCapabilities capabilities;
 
-    static public String AUT; // (mobile) app under testing
-    static public String SUT; // site under testing
-    static public String TEST_PLATFORM;
-    static public String DRIVER;
+    private static String AUT; // (mobile) app under testing
+    protected static String SUT; // site under testing
+    private static String TEST_PLATFORM;
+    private static String DRIVER;
+    private static String DEVICE_NAME;
+
 
     protected Driver() throws IOException {
         AUT = getProp("aut");
@@ -28,6 +30,7 @@ public class Driver extends TestProperties {
         SUT = t_sut == null ? null : "http://" + t_sut;
         TEST_PLATFORM = getProp("platform");
         DRIVER = getProp("driver");
+        DEVICE_NAME = getProp("devicename");
     }
 
     protected void prepareDriver() throws Exception {
@@ -36,10 +39,11 @@ public class Driver extends TestProperties {
         // Setup test platform: Android or iOS. Browser also depends on a platform.
         switch (TEST_PLATFORM) {
             case PLATFORM_ANDROID:
-                capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, EMULATOR); // default Android emulator
+                capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, DEVICE_NAME); // or Android emulator, or real device
                 browserName = BROWSER_CHROME;
                 break;
             case PLATFORM_IOS:
+                capabilities.setCapability(MobileCapabilityType.UDID, getProp("udid")); // or Android emulator, or real device
                 browserName = BROWSER_SAFARI;
                 break;
             default:
@@ -59,6 +63,8 @@ public class Driver extends TestProperties {
             throw new Exception("Unclear type of mobile app");
         }
         // Init driver for local Appium server with capabilities have been set
+
+
         if (driverSingle == null) driverSingle = new AppiumDriver(new URL(DRIVER), capabilities);
         // Set an object to handle timeouts
         if (waitSingle == null) waitSingle = new WebDriverWait(driver(), 10);
