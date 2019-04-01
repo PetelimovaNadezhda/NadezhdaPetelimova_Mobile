@@ -18,9 +18,9 @@ public class WebTest extends Driver {
     public void webTest() throws Exception {
         driver().get(SUT);
         driverWait().until(ExpectedConditions.urlToBe(SUT + "/"));
-        int statusCode = RestAssured.get(SUT).statusCode();
-        assertEquals(200, statusCode);
+        assertEquals(200,  RestAssured.get(SUT).statusCode());
         assertEquals(driverSingle.getTitle(), "Internet Assigned Numbers Authority");
+        //assertEquals(driverSingle.findElementById("intro").getText(), "The global coordination of the DNS Root, IP addressing, and other Internet protocol resources is performed as the Internet Assigned Numbers Authority (IANA) functions.");
         System.out.println("Site opening done");
     }
 }

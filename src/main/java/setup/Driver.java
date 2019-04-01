@@ -22,6 +22,8 @@ public class Driver extends TestProperties {
     private static String TEST_PLATFORM;
     private static String DRIVER;
     private static String DEVICE_NAME;
+    private static String APP_ACTIVITY;
+    private static String APP_PACKAGE;
 
 
     protected Driver() throws IOException {
@@ -31,6 +33,8 @@ public class Driver extends TestProperties {
         TEST_PLATFORM = getProp("platform");
         DRIVER = getProp("driver");
         DEVICE_NAME = getProp("devicename");
+        APP_PACKAGE = getProp("appPackage");
+        APP_ACTIVITY = getProp("appActivity");
     }
 
     protected void prepareDriver() throws Exception {
@@ -39,22 +43,23 @@ public class Driver extends TestProperties {
         // Setup test platform: Android or iOS. Browser also depends on a platform.
         switch (TEST_PLATFORM) {
             case PLATFORM_ANDROID:
-                capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, DEVICE_NAME); // or Android emulator, or real device
-                browserName = BROWSER_CHROME;
+                 browserName = BROWSER_CHROME;
                 break;
             case PLATFORM_IOS:
-                capabilities.setCapability(MobileCapabilityType.UDID, getProp("udid")); // or Android emulator, or real device
                 browserName = BROWSER_SAFARI;
                 break;
             default:
                 throw new Exception("Unknown mobile platform");
         }
+        capabilities.setCapability(MobileCapabilityType.UDID, getProp("udid")); // or Android emulator, or real device
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, TEST_PLATFORM);
 
         // Setup type of application: mobile, web (or hybrid)
         if (AUT != null && SUT == null) {
             // Native
             File app = new File(AUT);
+            capabilities.setCapability("appPackage", APP_PACKAGE);
+            capabilities.setCapability("appActivity", APP_ACTIVITY);
             capabilities.setCapability(MobileCapabilityType.APP, app.getAbsolutePath());
         } else if (SUT != null && AUT == null) {
             // Web
@@ -76,7 +81,7 @@ public class Driver extends TestProperties {
         return driverSingle;
     }
 
-    protected WebDriverWait driverWait(){
+    protected WebDriverWait driverWait() {
         return waitSingle;
     }
 
