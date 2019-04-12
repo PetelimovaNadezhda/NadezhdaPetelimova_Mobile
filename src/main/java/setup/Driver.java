@@ -32,7 +32,7 @@ public class Driver extends TestProperties {
         APP_NAME = getProp("appName", prop);
     }
 
-    public static void prepareDriver() throws Exception {
+    public void prepareDriver() throws Exception {
         capabilities = new DesiredCapabilities();
         String browserName;
         // Setup test platform: Android or iOS. Browser also depends on a platform.
@@ -67,7 +67,7 @@ public class Driver extends TestProperties {
     }
 
     //Singleton
-    public static AppiumDriver driver() throws Exception {
+    public AppiumDriver driver() throws Exception {
         if (driverSingle == null) prepareDriver();
         return driverSingle;
     }

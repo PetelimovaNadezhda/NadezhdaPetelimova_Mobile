@@ -3,6 +3,7 @@ package scenarios.WebTests;
 import io.restassured.RestAssured;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
+import scenarios.Hooks;
 import setup.Driver;
 
 import java.io.IOException;
@@ -11,7 +12,7 @@ import static org.testng.Assert.assertEquals;
 import static setup.PropertyFile.WEB;
 
 @Test(groups = "web")
-public class WebTest extends Driver {
+public class WebTest extends Hooks {
     protected WebTest() throws IOException {
         super(WEB.prop);
     }

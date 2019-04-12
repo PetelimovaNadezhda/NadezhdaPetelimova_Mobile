@@ -9,7 +9,6 @@
             </run>
         </groups>
         <packages>
-            <package name="scenarios"/>
             <package name="scenarios.WebTests"/>
         </packages>
     </test>

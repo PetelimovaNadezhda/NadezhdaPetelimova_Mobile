@@ -1,6 +1,7 @@
 package scenarios.NativeTest;
 
 import org.testng.annotations.Test;
+import scenarios.Hooks;
 import setup.Driver;
 
 import java.io.IOException;
@@ -10,7 +11,7 @@ import static scenarios.NativeTest.PageObjectContactManagerApp.*;
 import static setup.PropertyFile.NATIVE;
 
 @Test(groups = "native")
-public class NativeTest extends Driver {
+public class NativeTest extends Hooks {
 
     protected NativeTest() throws IOException {
         super(NATIVE.prop);

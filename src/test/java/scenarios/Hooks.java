@@ -3,12 +3,16 @@ package scenarios;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
+import setup.Driver;
 
-import static setup.Driver.driver;
-import static setup.Driver.prepareDriver;
+import java.io.IOException;
 
 @Test(groups = {"native", "web"})
-public class Hooks{
+public class Hooks extends Driver {
+
+    public Hooks(String prop) throws IOException {
+        super(prop);
+    }
 
     @BeforeSuite(alwaysRun = true, description = "Prepare driver to run test(s)")
     public void setUp() throws Exception {
