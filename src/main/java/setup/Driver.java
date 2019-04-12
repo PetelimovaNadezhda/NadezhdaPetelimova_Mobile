@@ -38,7 +38,7 @@ public class Driver extends TestProperties {
         // Setup test platform: Android or iOS. Browser also depends on a platform.
         switch (TEST_PLATFORM) {
             case PLATFORM_ANDROID:
-                capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, REAL_DEVICE); // default Android emulator
+                capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, EMULATOR); // default Android emulator
                 browserName = BROWSER_CHROME;
                 break;
             case PLATFORM_IOS:
