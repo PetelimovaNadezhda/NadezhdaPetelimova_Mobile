@@ -15,28 +15,30 @@ public class Driver extends TestProperties {
 
     protected static AppiumDriver driverSingle = null;
     private static WebDriverWait waitSingle;
-    protected DesiredCapabilities capabilities;
+    protected static DesiredCapabilities capabilities;
 
     static public String AUT; // (mobile) app under testing
     static public String SUT; // site under testing
     static public String TEST_PLATFORM;
     static public String DRIVER;
+    static public String APP_NAME;
 
-    protected Driver() throws IOException {
-        AUT = getProp("aut");
-        String t_sut = getProp("sut");
-        SUT = t_sut == null ? null : "http://" + t_sut;
-        TEST_PLATFORM = getProp("platform");
-        DRIVER = getProp("driver");
+    public Driver(String prop) throws IOException {
+        AUT = getProp("aut", prop);
+        String t_sut = getProp("sut", prop);
+        SUT = t_sut == null ? null : "https://" + t_sut;
+        TEST_PLATFORM = getProp("platform", prop);
+        DRIVER = getProp("driver", prop);
+        APP_NAME = getProp("appName", prop);
     }
 
-    protected void prepareDriver() throws Exception {
+    public static void prepareDriver() throws Exception {
         capabilities = new DesiredCapabilities();
         String browserName;
         // Setup test platform: Android or iOS. Browser also depends on a platform.
         switch (TEST_PLATFORM) {
             case PLATFORM_ANDROID:
-                capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, EMULATOR); // default Android emulator
+                capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, REAL_DEVICE); // default Android emulator
                 browserName = BROWSER_CHROME;
                 break;
             case PLATFORM_IOS:
@@ -50,7 +52,7 @@ public class Driver extends TestProperties {
         // Setup type of application: mobile, web (or hybrid)
         if (AUT != null && SUT == null) {
             // Native
-            File app = new File(AUT);
+            File app = new File(new File(AUT), APP_NAME);
             capabilities.setCapability(MobileCapabilityType.APP, app.getAbsolutePath());
         } else if (SUT != null && AUT == null) {
             // Web
@@ -65,7 +67,7 @@ public class Driver extends TestProperties {
     }
 
     //Singleton
-    protected AppiumDriver driver() throws Exception {
+    public static AppiumDriver driver() throws Exception {
         if (driverSingle == null) prepareDriver();
         return driverSingle;
     }

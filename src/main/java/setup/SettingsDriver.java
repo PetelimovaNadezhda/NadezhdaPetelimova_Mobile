@@ -9,5 +9,4 @@ public class SettingsDriver {
 
     public static final String BROWSER_CHROME = "Chrome";
     public static final String BROWSER_SAFARI = "Safari";
-
 }

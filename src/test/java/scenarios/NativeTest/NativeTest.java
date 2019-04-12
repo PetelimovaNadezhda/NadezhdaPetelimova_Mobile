@@ -7,12 +7,13 @@ import java.io.IOException;
 
 import static org.testng.Assert.*;
 import static scenarios.NativeTest.PageObjectContactManagerApp.*;
+import static setup.PropertyFile.NATIVE;
 
 @Test(groups = "native")
 public class NativeTest extends Driver {
 
     protected NativeTest() throws IOException {
-        super();
+        super(NATIVE.prop);
     }
 
     @Test(description = "Just click on button 'Add contact'")
@@ -26,11 +27,4 @@ public class NativeTest extends Driver {
         assertNotNull(driverSingle.getKeyboard());
         System.out.println("Simplest Appium test done");
     }
-
-
-//    Check virtual keyboard appears
-//    Check pop-up "Tap to Google Search and more" appears:
-
-
-
 }
