@@ -29,7 +29,6 @@ public class Driver extends TestProperties {
 
 
     public Driver(String prop) throws IOException {
-        System.out.println("HI!");
         AUT = getProp("aut", prop);
         String t_sut = getProp("sut", prop);
         SUT = t_sut == null ? null : "https://" + t_sut;

@@ -10,7 +10,6 @@
         </groups>
         <classes>
             <class name="scenarios.NativeTest.NativeTestAndroid"/>
-            <class name="scenarios.Hooks"/>
         </classes>
     </test>
 </suite>

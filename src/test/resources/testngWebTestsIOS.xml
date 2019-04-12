@@ -10,7 +10,6 @@
         </groups>
         <classes>
             <class name="scenarios.WebTests.WebTest"/>
-            <class name="scenarios.Hooks"/>
         </classes>
     </test>
 </suite>

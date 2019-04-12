@@ -16,7 +16,6 @@ public class Hooks extends Driver {
 
     @BeforeSuite(alwaysRun = true, description = "Prepare driver to run test(s)")
     public void setUp() throws Exception {
-        System.out.println("WHAT&");
         prepareDriver();
         System.out.println("Driver prepared");
 
