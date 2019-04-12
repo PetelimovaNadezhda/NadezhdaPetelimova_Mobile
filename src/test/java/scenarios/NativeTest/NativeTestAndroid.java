@@ -1,18 +1,20 @@
 package scenarios.NativeTest;
 
 import org.testng.annotations.Test;
+import scenarios.Hooks;
 import setup.Driver;
 
 import java.io.IOException;
 
 import static org.testng.Assert.*;
 import static scenarios.NativeTest.PageObjectContactManagerApp.*;
+import static setup.PropertyFile.MOBILEFARMANDROID;
 
 @Test(groups = "native")
-public class NativeTest extends Driver {
+public class NativeTestAndroid extends Hooks {
 
-    protected NativeTest() throws IOException {
-        super();
+    protected NativeTestAndroid() throws IOException {
+        super(MOBILEFARMANDROID.prop);
     }
 
     @Test(description = "Just click on button 'Add contact'")
@@ -26,11 +28,4 @@ public class NativeTest extends Driver {
         assertNotNull(driverSingle.getKeyboard());
         System.out.println("Simplest Appium test done");
     }
-
-
-//    Check virtual keyboard appears
-//    Check pop-up "Tap to Google Search and more" appears:
-
-
-
 }

@@ -6,7 +6,7 @@ public enum PropertyFile {
     MOBILEFARMIOS("/src/main/resources/mobileFarm.properties"),
     MOBILEFARMANDROID("/src/main/resources/mobileFarmAndroid.properties");
 
-    String prop;
+    public String prop;
 
     PropertyFile(String data) {
         prop = data;

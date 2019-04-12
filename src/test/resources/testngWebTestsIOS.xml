@@ -2,15 +2,15 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="TestNg Suite">
-    <test name="Web test">
+    <test name="Native test ios">
         <groups>
             <run>
-                <include name="web"/>
+                <include name="native"/>
             </run>
         </groups>
-        <packages>
-            <package name="scenarios"/>
-            <package name="scenarios.WebTests"/>
-        </packages>
+        <classes>
+            <class name="scenarios.WebTests.WebTest"/>
+            <class name="scenarios.Hooks"/>
+        </classes>
     </test>
 </suite>

@@ -3,15 +3,15 @@ package scenarios.WebTests;
 import io.restassured.RestAssured;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
-import setup.Driver;
-
-import java.io.IOException;
+import scenarios.Hooks;
 
 import static org.testng.Assert.assertEquals;
+import static setup.PropertyFile.MOBILEFARMIOS;
 
 @Test(groups = "web")
-public class WebTest extends Driver {
-    protected WebTest() throws IOException {
+public class WebTest extends Hooks {
+    protected WebTest() throws Exception {
+        super(MOBILEFARMIOS.prop);
     }
 
     @Test(description = "Open website")

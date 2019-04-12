@@ -15,7 +15,7 @@ public class Driver extends TestProperties {
 
     protected static AppiumDriver driverSingle = null;
     private static WebDriverWait waitSingle;
-    protected DesiredCapabilities capabilities;
+    protected static DesiredCapabilities capabilities;
 
     private static String AUT; // (mobile) app under testing
     protected static String SUT; // site under testing
@@ -24,20 +24,25 @@ public class Driver extends TestProperties {
     private static String DEVICE_NAME;
     private static String APP_ACTIVITY;
     private static String APP_PACKAGE;
+    private static String UDID;
+    static public String APP_NAME;
 
 
-    protected Driver() throws IOException {
-        AUT = getProp("aut");
-        String t_sut = getProp("sut");
-        SUT = t_sut == null ? null : "http://" + t_sut;
-        TEST_PLATFORM = getProp("platform");
-        DRIVER = getProp("driver");
-        DEVICE_NAME = getProp("devicename");
-        APP_PACKAGE = getProp("appPackage");
-        APP_ACTIVITY = getProp("appActivity");
+    public Driver(String prop) throws IOException {
+        System.out.println("HI!");
+        AUT = getProp("aut", prop);
+        String t_sut = getProp("sut", prop);
+        SUT = t_sut == null ? null : "https://" + t_sut;
+        TEST_PLATFORM = getProp("platform", prop);
+        DRIVER = getProp("driver", prop);
+        DEVICE_NAME = getProp("devicename", prop);
+        APP_PACKAGE = getProp("appPackage", prop);
+        APP_ACTIVITY = getProp("appActivity", prop);
+        UDID = getProp("udid", prop);
+        APP_NAME = getProp("appName", prop);
     }
 
-    protected void prepareDriver() throws Exception {
+    public void prepareDriver() throws Exception {
         capabilities = new DesiredCapabilities();
         String browserName;
         // Setup test platform: Android or iOS. Browser also depends on a platform.
@@ -51,13 +56,13 @@ public class Driver extends TestProperties {
             default:
                 throw new Exception("Unknown mobile platform");
         }
-        capabilities.setCapability(MobileCapabilityType.UDID, getProp("udid")); // or Android emulator, or real device
+        capabilities.setCapability(MobileCapabilityType.UDID, UDID); // or Android emulator, or real device
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, TEST_PLATFORM);
 
         // Setup type of application: mobile, web (or hybrid)
         if (AUT != null && SUT == null) {
             // Native
-            File app = new File(AUT);
+            File app = new File(new File(AUT), APP_NAME);
             capabilities.setCapability("appPackage", APP_PACKAGE);
             capabilities.setCapability("appActivity", APP_ACTIVITY);
             capabilities.setCapability(MobileCapabilityType.APP, app.getAbsolutePath());
@@ -76,7 +81,7 @@ public class Driver extends TestProperties {
     }
 
     //Singleton
-    protected AppiumDriver driver() throws Exception {
+    public AppiumDriver driver() throws Exception {
         if (driverSingle == null) prepareDriver();
         return driverSingle;
     }
